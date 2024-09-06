@@ -5,8 +5,9 @@ import { AddCategory } from './components/AddCategory';
 export const GifApp = () => {
   const [categories, setCategories] = useState(['F1']);
 
-  const onAddCategory = () =>{
-    setCategories([...categories, 'Valorant']);
+  const onAddCategory = (newCategory) =>{
+    setCategories([...categories, newCategory]);
+
     // setCategories(['Valorant,', ...setCategories]); para colocar al principio
     // setCategories(cat => [...cat, 'Valorant']);
   }
@@ -15,8 +16,11 @@ export const GifApp = () => {
   return (
     <>
         <h1>Gif App</h1>
-        <AddCategory />
-        <button onClick={onAddCategory}>Agregar</button>
+        <AddCategory 
+          // setCategories={setCategories}
+          onNewCategory={(e) => onAddCategory(e)}
+        />
+  
         <ol>
           {categories.map(category => {
             return <li key={category}>{category}</li>;
