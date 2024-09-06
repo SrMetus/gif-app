@@ -1,15 +1,14 @@
 import { useState } from 'react';
 import './styles.css';
 import { AddCategory } from './components/AddCategory';
+import { GifGrid } from './components/GifGrid';
 
 export const GifApp = () => {
   const [categories, setCategories] = useState(['F1']);
 
-  const onAddCategory = (newCategory) =>{
+  const onAddCategory = (newCategory) => {
+    if(categories.includes(newCategory)) return;
     setCategories([...categories, newCategory]);
-
-    // setCategories(['Valorant,', ...setCategories]); para colocar al principio
-    // setCategories(cat => [...cat, 'Valorant']);
   }
 
 
@@ -17,15 +16,14 @@ export const GifApp = () => {
     <>
         <h1>Gif App</h1>
         <AddCategory 
-          // setCategories={setCategories}
           onNewCategory={(e) => onAddCategory(e)}
         />
-  
-        <ol>
-          {categories.map(category => {
-            return <li key={category}>{category}</li>;
-          })}
-        </ol>
+        {categories.map(category => (
+            <GifGrid 
+              key={category}
+              category={category} 
+            />
+        ))}
     </>
   )
 }
